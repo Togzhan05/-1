@@ -1,0 +1,19 @@
+from elasticsearch import Elasticsearch
+
+# Подключение к локальному серверу Elasticsearch
+es = Elasticsearch("http://localhost:9200")
+
+# Индексирование документа
+doc = {
+    "title": "Hello, Elasticsearch!",
+    "content": "This is a test document."
+}
+response = es.index(index="new_index", id="some_id", document=doc)
+print("Ответ на запрос индексирования:", response)
+
+# Поиск документа
+search_result = es.search(index="new_index", query={"match": {"title": "Hello"}})
+if search_result['hits']['hits']:
+    print("Результаты поиска:", search_result['hits']['hits'][0]['_source'])
+else:
+    print("Документы не найдены.")
