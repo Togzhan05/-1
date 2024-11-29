@@ -1,0 +1,9 @@
+FROM python:3.9-slim
+WORKDIR /custom
+
+COPY requirements.txt /custom
+RUN pip install -r requirements.txt
+
+COPY . /custom
+
+CMD ["python", "custom.py"]
